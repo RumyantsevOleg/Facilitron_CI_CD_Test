@@ -1,0 +1,85 @@
+name: E2E Tests
+
+on:
+  push:
+    branches:
+      - master
+      - dev
+      - production
+      - staging
+      - demo
+
+  pull_request:
+    branches: [ '*' ]
+
+jobs:
+  e2e-tests:
+    name: Run E2E tests
+    runs-on: ubuntu-latest
+
+    env:
+      NODE_ENV: local
+      REDIS_HOST: localhost
+      REDIS_PORT: 6379
+      NOT_CREATE_REDIS_STUB_FOR_E2E_TESTING: yes
+
+      PORT: 4000
+
+      #mogo db
+      DEVELOPER_FEES_DB_MONGO_URL: mongodb://localhost:27017/DeveloperFees
+
+      FACILITRON_CLUSTER_MONGO_URL: mongodb://localhost:27017
+      FACILITRON_COMMON_DB_NAME: Facilitron_common
+
+      MONGO_POOLSIZE: 5
+      MONGO_SOCKET_TIMEOUT_MINUTES: 5
+
+      ExternalTokenEncryption: some
+      GMAIL_NODEMAILER_USER: some
+
+      FORTE_API_ACCESS_KEY: some
+      FORTE_API_SECURE_KEY: some
+      FORTE_REST_API_ACCESS_ID: some
+      FORTE_REST_API_SECURE_KEY: some
+      FORTE_REST_API_BASE_URL: some
+      FORTE_REST_API_ORGANIZATION_ID: some
+      FORTE_REST_API_LOCATION_ID: some
+      FORTE_REST_API_LOGIN_ID: some
+      FORTE_REST_API_JS_URL: some
+
+      CLOUDFRONT_KEYPAIR_ID: some
+      CLOUDFRONT_KEYPAIR_PK: some
+
+      #MINIFY_VIEWS: no
+      MINIFY_PUBLIC: no
+
+      #rate limit
+      RATE_LIMIT_TIMEOUT_MINUTES: 10
+      RATE_LIMIT_MAX_REQUESTS: 4000
+
+      WEB_CONCURRENCY: 4
+      SESSION_SECRET: some
+
+    services:
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+        options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 3
+
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Checking of e2e tests (if they exists)
+        run: |
+          if ! grep -q '"test:e2e"' package.json; then
+            echo "E2E tests script not found. Skip this step" 
+            exit 0
+          else
+            npm run test:e2e
+          fi
