@@ -1,0 +1,6 @@
+{
+    "name": "Developer-fees",
+    "description": "Developer-fees",
+    "repository": "https://github.com/Facilitron/developer-fees",
+    "image": "heroku/nodejs"
+  }
