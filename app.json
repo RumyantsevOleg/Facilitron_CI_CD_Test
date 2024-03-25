@@ -3,6 +3,10 @@
   "description": "Developer-fees",
   "repository": "https://github.com/Facilitron/developer-fees",
   "image": "heroku/nodejs",
+  "env": {
+    "NODE_ENV": "local",
+    "NOT_CREATE_REDIS_STUB_FOR_E2E_TESTING": "yes"
+  },
   "scripts": {
     "test": "npm run test:e2e"
   }
