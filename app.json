@@ -1,6 +1,9 @@
 {
-    "name": "Developer-fees",
-    "description": "Developer-fees",
-    "repository": "https://github.com/Facilitron/developer-fees",
-    "image": "heroku/nodejs"
+  "name": "Developer-fees",
+  "description": "Developer-fees",
+  "repository": "https://github.com/Facilitron/developer-fees",
+  "image": "heroku/nodejs",
+  "scripts": {
+    "test": "npm run test:e2e"
   }
+}
