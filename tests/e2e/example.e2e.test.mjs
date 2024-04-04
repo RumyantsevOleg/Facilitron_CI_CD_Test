@@ -37,7 +37,7 @@ describe('Test Example', async () => {
       const response = await request(app).get('/api/test').expect(200)
       const { body } = response
       console.log('body', body)
-      expect(body).to.be.deep.equal({ message: 'Test passed2' })
+      expect(body).to.be.deep.equal({ message: 'Test passed' })
    })
 
    // Clear test  in the database
