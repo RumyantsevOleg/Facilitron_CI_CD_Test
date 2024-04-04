@@ -25,7 +25,6 @@ jobs:
       NOT_CREATE_REDIS_STUB_FOR_E2E_TESTING: yes
 
       PORT: 4000
-
       #mogo db
       DEVELOPER_FEES_DB_MONGO_URL: mongodb://localhost:27017/DeveloperFees
 

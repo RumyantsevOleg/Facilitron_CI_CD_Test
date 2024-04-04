@@ -1,0 +1,25 @@
+{
+  "name": "Developer-fees",
+  "description": "Developer-fees",
+  "repository": "https://github.com/Facilitron/developer-fees",
+  "image": "heroku/nodejs",
+  "env": {
+    "NODE_ENV": "local",
+    "NOT_CREATE_REDIS_STUB_FOR_E2E_TESTING": "yes"
+  },
+  "environments": {
+    "test": {
+      "buildpacks": [
+        {
+          "url": "heroku-community/chrome-for-testing"
+        },
+        {
+          "url": "heroku/nodejs"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "test": "npm run test:e2e" // We can wrote additional scripts here. But to me the github actions handle it better
+  }
+}
