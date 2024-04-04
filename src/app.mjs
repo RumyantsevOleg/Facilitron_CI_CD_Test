@@ -33,6 +33,7 @@ export default class App {
 
    #registerRoutes() {
       this.#app.get('/api/test', (req, res, next) => {
+         console.log('some')
          res.send({ message: 'Test passed2' })
       })
    }
