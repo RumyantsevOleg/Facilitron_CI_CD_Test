@@ -13,6 +13,16 @@ on:
   pull_request:
     branches: [ '*' ]
 
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        description: "Switch between environments"
+        options:
+          - staging
+          - production
+        required: true
+
 jobs:
   e2e-tests:
     name: Run E2E tests
